@@ -1,0 +1,6 @@
+return chat.senderId == user.id && (<OutgoingMessage key={idx} chat={chat}/>)
+When chat.senderId !== user.id, the expression evaluates to false, so false gets returned inside the array.
+
+* optional chaining save lot from ugly errors
+
+* useContext data was lost bcz it was frontend data and not stored in storage
