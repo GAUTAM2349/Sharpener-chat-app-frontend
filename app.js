@@ -8,28 +8,21 @@ const Login = lazy(() => import("./src/components/auth/Login"));
 import Signup from "./src/components/auth/Signup";
 import Chatpage from "./src/components/chat/Chatpage";
 
-
 import Homepage from "./src/components/Homepage/Homepage";
 import CreateGroup from "./src/components/Group/CreateGroup";
 import { PrivateRoute } from "./utils/PrivateRoute";
 import { AuthProvider } from "./utils/AuthProvider";
 import GroupInfo from "./src/components/chat/GroupInfo";
 
-
 const AppLayout = () => {
   return (
     <>
-    <AuthProvider>
-    <PrivateRoute>
-    <div className="relative bg-blue-600 hide-scrollbar !h-[100vh]">
-
-        
+      <PrivateRoute>
+        <div className="relative bg-blue-600 hide-scrollbar !h-[100vh]">
           {/* <NavBar /> */}
           <Outlet />
-        
-      </div>
-    </PrivateRoute>
-    </AuthProvider>
+        </div>
+      </PrivateRoute>
     </>
   );
 };
@@ -73,10 +66,9 @@ const appRouter = createBrowserRouter([
   },
 ]);
 
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  
+  <AuthProvider>
     <RouterProvider router={appRouter} />
-  
-);   
+  </AuthProvider>
+);
