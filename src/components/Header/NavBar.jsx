@@ -5,12 +5,15 @@ import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
 
 import { AuthContext } from '../../../utils/AuthProvider';
-import { GroupOwnerContext } from "../../../utils/GroupOwnerContext";
 
 function NavBar() {
 
-  const {loggedinUser,user} = useContext(AuthContext);
+  const {loggedinUser,user,isAuthenticated, setIsAuthenticated} = useContext(AuthContext);
   
+  const handleLogout = () =>{
+    if(isAuthenticated === true)
+    setIsAuthenticated(false);
+  }
   
   return (
     
@@ -22,7 +25,7 @@ function NavBar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/"><span className="text-white">Home</span></Nav.Link>
-            <Nav.Link as={Link} to="/login"><span className="text-white">Login</span></Nav.Link>
+            <Nav.Link onClick={()=>{localStorage.clear();handleLogout()}}><span className="text-white">Logout</span></Nav.Link>
             <Nav.Link as={Link} to="/create-group"><span className="text-white">create+</span></Nav.Link>
             
           </Nav>

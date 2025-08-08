@@ -1,0 +1,5 @@
+Part of codes where socket is used :-
+
+1. config/socket.js                     --- connection codes
+2. src/components/chat/ChatInput.jsx    --- broadcast message on message send 
+3. src/components/chat/Chats.jsx        --- join room, leave room, online users -- mostly used here

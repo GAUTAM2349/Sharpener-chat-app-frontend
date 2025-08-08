@@ -2,7 +2,6 @@ import { useContext, useState } from "react";
 import api from "../../../config/axiosConfig";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../utils/AuthProvider";
-import socket from "../../../config/socket";
 
 const ChatInput = ({ groupId, socket }) => {
   const [message, setMessage] = useState("");

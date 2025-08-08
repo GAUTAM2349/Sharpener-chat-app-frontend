@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import api from "../../../config/axiosConfig";
+import { AuthContext } from "../../../utils/AuthProvider";
 
 
 const LoginPage = () => {
@@ -10,7 +11,10 @@ const LoginPage = () => {
   const [message, setMessage] = useState(null);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const {isAuthenticated,setIsAuthenticated,isLoading} = useContext(AuthContext);
   
+  if (isLoading) return <div>Loading...</div>;
+  if (isAuthenticated) return <Navigate to="/" replace />;
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -30,6 +34,7 @@ const LoginPage = () => {
       if (response.status === 200) {
         if (token) {
           localStorage.setItem("token", token);
+          if(!isAuthenticated) setIsAuthenticated(true);
           setTimeout(() => {
             navigate("/");
           }, 0);

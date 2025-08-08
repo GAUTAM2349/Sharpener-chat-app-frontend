@@ -7,7 +7,6 @@ export const PrivateRoute = ({ children }) => {
   const { isAuthenticated, isLoadingAuth } = useContext(AuthContext);
   console.log("private crossed auth import");
 
-
   useEffect(()=>{ console.log("entered private useEffect", isAuthenticated)},[])
   
   if (isLoadingAuth){
