@@ -1,3 +1,182 @@
+// import { useContext, useEffect, useState } from "react";
+// import { Navigate, useNavigate } from "react-router-dom";
+// import api from "../../../config/axiosConfig";
+// import { AuthContext } from "../../../utils/AuthProvider";
+
+
+// const LoginPage = () => {
+//   const backgroundImageUrl =
+//     "https://images.unsplash.com/photo-1525302220185-c387a117886e?auto=format&fit=crop&w=1950&q=80";
+
+//   const [message, setMessage] = useState(null);
+//   const [error, setError] = useState(null);
+  
+//   const {isAuthenticated, setIsAuthenticated, isLoading} = useContext(AuthContext);
+
+//   if (isLoading) return <div>Loading...</div>;
+//   if (isAuthenticated) return <Navigate to="/" replace />;
+
+//   const handleFormSubmit = async (e) => {
+//     e.preventDefault();
+//     const { email, password } = e.target;
+    
+//     // const input = {
+//     //   email: email.value,
+//     //   password: password.value,
+//     // };
+
+//     try {
+
+//       const response = await api.post("/user/login", {email, password});
+//       const { message, token } = response.data;
+
+//       if (response.status === 200) {
+//         if (token) {
+//           localStorage.setItem("token", token);
+//             setTimeout(() => {
+//             setIsAuthenticated(true);
+//           }, 0);
+//         } else {
+//           setError("Authentication Error!!");
+//           return;
+//         }
+//       }
+
+//       setError(null);
+//     } catch (error) {
+//       if (error.response && error.response.data) {
+//         setError(error.response.data.message);
+//       } else {
+//         setError(error.message);
+//       }
+//       setMessage(null);
+//     }
+//   };
+
+//   const [x,setX] = useState(25);
+
+//   function increment(){
+//     console.log("prev value of x : ", x);
+//     setX(prev=>prev+1)
+    
+//     setTimeout(()=>{
+//       console.log("new value of x : ",x);
+//     },5000);
+    
+//   }
+
+//   useEffect(()=>{
+//       setTimeout(()=>{
+//         setX(0);
+//       }, 3000)
+//       setTimeout(()=>{
+//         setX(10);
+//       }, 7000)
+//   },[])
+
+//   useEffect(()=>{
+    
+// },[])
+
+//   return (
+//     <>
+//       <div
+//         className="relative min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-no-repeat bg-cover"
+//         style={{ backgroundImage: `url(${backgroundImageUrl})` }}
+//       >
+//         <div className="absolute inset-0 bg-black opacity-60 z-0"></div>
+//         <div className="max-w-md w-full space-y-8 p-10 bg-white rounded-xl z-10">
+//           <div className="text-center">
+//             <h2 className="mt-6 text-3xl font-bold text-gray-900">
+//               Welcome Back!
+//             </h2>
+
+
+//             <h1 className="bold text-red" id="my-number">{x}</h1>
+//                     <button className="w-[100px] h-[100px] bg-blue-700" onClick={increment}>INCREMENT</button>
+
+
+
+//             <p className="mt-2 text-sm text-gray-600">
+//               Please sign in to your account
+//             </p>
+//           </div>
+
+//           <div className="flex justify-center items-center space-x-3">
+//             <span className="w-11 h-11 flex items-center justify-center rounded-full bg-blue-900 text-white text-lg font-bold cursor-pointer hover:shadow-lg transition ease-in duration-300">
+              
+//             </span>
+//             <span className="w-11 h-11 flex items-center justify-center rounded-full bg-blue-400 text-white text-lg font-bold cursor-pointer hover:shadow-lg transition ease-in duration-300">
+              
+//             </span>
+//             <span className="w-11 h-11 flex items-center justify-center rounded-full bg-blue-500 text-white text-lg font-bold cursor-pointer hover:shadow-lg transition ease-in duration-300">
+//               {/* Add your SVG icon here */}
+//             </span>
+//           </div>
+
+//           {/* <div className="flex items-center justify-center space-x-2">
+//             <span className="h-px w-16 bg-gray-300"></span>
+//              <span className="text-gray-500 font-normal">OR</span> 
+//             <span className="h-px w-16 bg-gray-300"></span>
+//           </div> */}
+
+//           <form onSubmit={handleFormSubmit} className="mt-8 space-y-6">
+//             <div className="relative">
+//               <label className="text-sm font-bold text-gray-700 tracking-wide">
+//                 Email
+//               </label>
+//               <input
+//                 type="email"
+//                 name="email"
+//                 placeholder="mail@gmail.com"
+//                 className="w-full text-base py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
+//               />
+//             </div>
+
+//             <div className="mt-8">
+//               <label className="text-sm font-bold text-gray-700 tracking-wide">
+//                 Password
+//               </label>
+//               <input
+//                 type="password"
+//                 placeholder="Enter your password"
+//                 name="password"
+//                 className="w-full text-base py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
+//               />
+//             </div>
+
+//             <div>
+//               <button
+//                 type="submit"
+//                 className="w-full flex justify-center bg-indigo-500 text-gray-100 p-4 rounded-full tracking-wide font-semibold focus:outline-none focus:shadow-outline hover:bg-indigo-600 shadow-lg cursor-pointer transition ease-in duration-300"
+//               >
+//                 Sign in
+//               </button>
+//             </div>
+
+//             <p className="flex flex-col items-center justify-center mt-10 text-center text-md text-gray-500">
+              
+//               <a
+//                 href="/signup"
+//                 className="text-indigo-500 hover:text-indigo-500 no-underline hover:underline cursor-pointer transition ease-in duration-300"
+//               >
+//                 Sign up
+//               </a>
+//             </p>
+
+//             {error && <span className="mt-[5px] text-red-500">{error}</span>}
+//             {message && (
+//               <span className="mt-[5px] text-green-400">{message}</span>
+//             )}
+//           </form>
+//         </div>
+//       </div>
+//     </>
+//   );
+// };
+
+// export default LoginPage;
+
 import { useContext, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import api from "../../../config/axiosConfig";
